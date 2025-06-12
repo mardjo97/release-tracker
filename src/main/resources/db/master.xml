@@ -6,4 +6,5 @@
        http://www.liquibase.org/xml/ns/dbchangelog
        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.16.xsd">
 
+    <include file="release-tracker-1.0.0/release-tracker-1.0.0.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
