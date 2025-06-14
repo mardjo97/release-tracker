@@ -12,5 +12,8 @@ import java.util.List;
 public interface ReleaseService {
   List<ReleaseDto> findFiltered(Pageable pageable);
   ReleaseDto getOne(Long id);
-  ReleaseDto createRelease(ReleaseDto ReleaseDto);
+  ReleaseDto createRelease(ReleaseDto releaseDto);
+  ReleaseDto partialUpdateRelease(Long id, ReleaseDto releaseDto);
+  ReleaseDto fullUpdateRelease(Long id, ReleaseDto releaseDto);
+  void deleteRelease(Long id);
 }

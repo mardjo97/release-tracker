@@ -5,24 +5,23 @@ import com.neon.release_tracker.release.api.rest.dto.ReleaseDto;
 import com.neon.release_tracker.release.domain.model.ReleaseEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-
-import java.util.List;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ReleaseMapper extends EntityMapper<ReleaseDto, ReleaseEntity> {
-  @Named("releaseToDto")
-  @Mapping(source = "id", target = "id")
-  @Mapping(source = "name", target = "name")
-  @Mapping(source = "description", target = "description")
-  @Mapping(source = "releaseDate", target = "releaseDate")
-  @Mapping(source = "status", target = "status")
-  ReleaseDto toDto(ReleaseEntity s);
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "createdAt", ignore = true)
+  @Mapping(target = "lastUpdateAt", ignore = true)
+  @Mapping(target = "enabled", ignore = true)
+  void partialUpdate(@MappingTarget ReleaseEntity entity, ReleaseDto dto);
 
-  @Named("releaseToDtos")
-  default List<ReleaseDto> toDto(List<ReleaseEntity> s) {
-    return s.stream()
-        .map(this::toDto)
-        .toList();
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "createdAt", ignore = true)
+  @Mapping(target = "lastUpdateAt", ignore = true)
+  @Mapping(target = "enabled", ignore = true)
+  void fullUpdate(@MappingTarget ReleaseEntity entity, ReleaseDto dto);
+
+  default void softDelete(@MappingTarget ReleaseEntity entity) {
+    entity.setEnabled(false);
   }
 }
