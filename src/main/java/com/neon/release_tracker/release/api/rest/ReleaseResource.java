@@ -1,7 +1,7 @@
 package com.neon.release_tracker.release.api.rest;
 
 import com.neon.release_tracker.release.api.rest.dto.ReleaseDto;
-import com.neon.release_tracker.release.api.rest.dto.ReleaseFilterRequest;
+import com.neon.release_tracker.release.api.rest.dto.ReleaseFilterRequestDto;
 import com.neon.release_tracker.release.domain.service.ReleaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -18,9 +18,16 @@ import java.util.List;
 public class ReleaseResource {
   private final ReleaseService releaseService;
 
+  @GetMapping("/statuses")
+  @Operation(summary = "Get release statuses", description = "Returns a list of possible release statuses")
+  public ResponseEntity<List<String>> getReleaseStatuses() {
+    List<String> releaseStatuses = releaseService.getReleaseStatuses();
+    return ResponseEntity.ok().body(releaseStatuses);
+  }
+
   @GetMapping("")
   @Operation(summary = "Get filtered releases", description = "Returns a filtered and paginated list of releases")
-  public ResponseEntity<List<ReleaseDto>> getFiltered(@ModelAttribute ReleaseFilterRequest filter, Pageable pageable) {
+  public ResponseEntity<List<ReleaseDto>> getFiltered(@ModelAttribute ReleaseFilterRequestDto filter, Pageable pageable) {
     List<ReleaseDto> releases = releaseService.findFiltered(filter, pageable);
     return ResponseEntity.ok().body(releases);
   }
