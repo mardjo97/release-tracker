@@ -1,6 +1,7 @@
 package com.neon.release_tracker.release.api.rest;
 
 import com.neon.release_tracker.release.api.rest.dto.ReleaseDto;
+import com.neon.release_tracker.release.api.rest.dto.ReleaseFilterRequest;
 import com.neon.release_tracker.release.domain.service.ReleaseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class ReleaseResource {
   private final ReleaseService releaseService;
 
   @GetMapping("")
-  public ResponseEntity<List<ReleaseDto>> getFiltered(Pageable pageable) {
-    List<ReleaseDto> releases = releaseService.findFiltered(pageable);
+  public ResponseEntity<List<ReleaseDto>> getFiltered(@ModelAttribute ReleaseFilterRequest filter, Pageable pageable) {
+    List<ReleaseDto> releases = releaseService.findFiltered(filter, pageable);
     return ResponseEntity.ok().body(releases);
   }
 
