@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "c56db40b-df78-4c2e-a470-0667c6e192fc",
+		"name": "Release tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13539402"
+	},
+	"item": [
+		{
+			"name": "Get list of release statuses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{loc}}/api/releases/statuses",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases",
+						"statuses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get filtered",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{loc}}/api/releases?size=10&page=0&status=QA_DONE_ON_STAGING&name=123&releaseDateFrom=2025-06-10T00:43:07&releaseDateTo=2025-06-13T00:43:07&description=Description&sort=status,desc&sort=id,asc",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "status",
+							"value": "QA_DONE_ON_STAGING"
+						},
+						{
+							"key": "name",
+							"value": "123"
+						},
+						{
+							"key": "releaseDateFrom",
+							"value": "2025-06-10T00:43:07"
+						},
+						{
+							"key": "releaseDateTo",
+							"value": "2025-06-13T00:43:07"
+						},
+						{
+							"key": "description",
+							"value": "Description"
+						},
+						{
+							"key": "sort",
+							"value": "status,desc"
+						},
+						{
+							"key": "sort",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{loc}}/api/releases/:id",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1502"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create release",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test\",\r\n    \"description\": \"test d\",\r\n    \"releaseDate\": \"2025-06-13T00:43:06\",\r\n    \"status\": \"DONE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{loc}}/api/releases",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update release - full",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1502,\r\n    \"description\": \"test d3\",\r\n    \"releaseDate\": \"2025-06-13T00:43:06\",\r\n    \"createdAt\": \"2025-06-12T23:38:18\",\r\n    \"lastUpdateAt\": \"2025-06-12T23:38:18\",\r\n    \"status\": \"QA_DONE_ON_STAGING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{loc}}/api/releases/:id",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1502"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update release - partial",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1502,\r\n    \"description\": \"test d6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{loc}}/api/releases/:id",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1502"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete release",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{loc}}/api/releases/:id",
+					"host": [
+						"{{loc}}"
+					],
+					"path": [
+						"api",
+						"releases",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1501"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "loc",
+			"value": "localhost",
+			"type": "default"
+		}
+	]
+}
